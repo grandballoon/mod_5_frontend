@@ -3,15 +3,23 @@ import { Card } from 'semantic-ui-react'
 
 const Fact = (props) => {
 
+  const disputed = () =>{
+    return(
+      `${props.fact.disputes.length} disputes`
+    )
+  }
 
 
   return (
     <Card>
         <Card.Content header={props.fact.description} />
-        <Card.Content meta=<a>{props.fact.source}</a> />
-        <Card.Content exta>
-          {props.fact.disputes.length} disputes
-          {props.fact.verified ? 'verified' : 'not verified'}
+        <Card.Content extra>
+          <Card.Content>
+          <a href={props.fact.source}>
+            <Card.Content meta='source' />
+          </a>
+        </Card.Content>
+          {props.fact.verified ? 'verified' : disputed()}
       </Card.Content>
     </Card>
   )
