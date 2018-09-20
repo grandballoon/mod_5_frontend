@@ -11,8 +11,8 @@ import { syncStore } from './actions'
 class App extends Component {
 
   componentDidMount(){
-    // this.props.syncer()
-    console.log("component mounted")
+    this.props.syncer()
+
   }
 
   render() {
@@ -31,6 +31,9 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+function mapStateToProps(state){
+  return {facts: state.facts}
+}
 
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

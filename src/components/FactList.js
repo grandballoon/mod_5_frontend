@@ -7,19 +7,19 @@ import { syncStore } from '../actions'
 const FactList = ({ facts }) => {
 
   const renderFacts = () => {
-    return (
-      {facts.map(fact => <Fact key={fact.id} fact={fact}/>)}
+    return(
+      facts.map(fact => <Fact key={fact.id} fact={fact}/>)
     )
   }
 
   return(
+    setTimeout(() => console.log(facts), 6000)
     <React.Fragment>
       <Card.Group>
-        {facts ? renderFacts() : null }
+        {facts ? renderFacts() : <p>hello</p>}
       </Card.Group>
     </React.Fragment>
   )
-
 
 }
 
@@ -28,6 +28,10 @@ function mapStateToProps(state){
   return {facts: state.facts}
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    syncer: () => dispatch(syncStore())
+  }
+}
 
-
-export default connect(mapStateToProps)(FactList)
+export default connect(mapStateToProps, mapDispatchToProps)(FactList)

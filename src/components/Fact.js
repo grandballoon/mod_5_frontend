@@ -3,11 +3,7 @@ import { Card } from 'semantic-ui-react'
 
 const Fact = (props) => {
 
-  const disputed = () =>{
-    return(
-      `${props.fact.disputes.length} disputes`
-    )
-  }
+
 
 
   return (
@@ -19,7 +15,7 @@ const Fact = (props) => {
             <Card.Content meta='source' />
           </a>
         </Card.Content>
-          {props.fact.verified ? 'verified' : disputed()}
+          {props.fact.verified ? 'verified' : null}
       </Card.Content>
     </Card>
   )
