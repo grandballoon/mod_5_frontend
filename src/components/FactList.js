@@ -23,8 +23,8 @@ const FactList = ({ facts }) => {
 }
 
 function mapStateToProps(state){
-  console.log(state)
-  return {facts: state.facts}
+  console.log(state, state.fact)
+  return {facts: state.fact.facts}
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,4 @@
-import { ADD_FACT, UPDATE_STORE } from './types'
+import { ADD_FACT, UPDATE_STORE } from '../types'
 
 const initialFactState = {}
 
