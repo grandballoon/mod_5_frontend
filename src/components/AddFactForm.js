@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { uploadFact } from '../actions'
+import { uploadFact, syncStore } from '../actions'
 
 class AddFactForm extends Component {
   state ={
@@ -32,4 +32,11 @@ class AddFactForm extends Component {
 
 }
 
-export default connect(null, { uploadFact })(AddFactForm)
+const mapDispatchToProps = dispatch => {
+  return {
+    syncer: () => dispatch(syncStore()),
+    uploadFact: (description, category, source) => dispatch(uploadFact(description,category,source))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddFactForm)

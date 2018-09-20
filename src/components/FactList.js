@@ -13,7 +13,6 @@ const FactList = ({ facts }) => {
   }
 
   return(
-    setTimeout(() => console.log(facts), 6000)
     <React.Fragment>
       <Card.Group>
         {facts ? renderFacts() : <p>hello</p>}
