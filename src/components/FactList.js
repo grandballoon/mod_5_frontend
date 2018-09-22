@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import Fact from './Fact'
 import { Card } from 'semantic-ui-react'
 import { syncStore } from '../actions'
+import AddFactForm from './AddFactForm'
 
 const FactList = ({ facts }) => {
+
+  
 
   const renderFacts = () => {
     return(
@@ -17,6 +20,7 @@ const FactList = ({ facts }) => {
       <Card.Group>
         {facts ? renderFacts() : <p>hello</p>}
       </Card.Group>
+      <AddFactForm />
     </React.Fragment>
   )
 
