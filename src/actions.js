@@ -68,18 +68,20 @@ export const logoutUser = (username) => {
       body: JSON.stringify({user: {"username": username}})
     })
     .then(response => {
-      console.log(response)
-      // if (response.ok) {
-      //   return response.json()
-      // } else {
-      //   throw response
-      // }
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response
+      }
     })
-    .then(message => {
-      localStorage.removeItem('jwt')
-      dispatch({type:LOGOUT})
-    })
-    .catch(r => r.json().then(e => console.log(e.message)))
+    .then(console.log)
+
+
+    // .then(message => {
+    //   localStorage.removeItem('jwt')
+    //   dispatch({type:LOGOUT})
+    // })
+    // .catch(r => r.json().then(e => console.log(e.message)))
   }
 }
 
@@ -91,6 +93,7 @@ export const fetchCurrentUser = () => {
       headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}
     })
     .then(resp => resp.json())
+    // .then(r => console.log(r))
     .then(({ user }) => dispatch(setCurrentUser(user)))
   }
 }

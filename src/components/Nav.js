@@ -7,8 +7,10 @@ import { connect } from 'react-redux'
 const Nav = (props) => {
 
 
+  const logProps = () => {console.log(props.user.user.username)}
+
   return (
-    <Button onClick={logoutUser(props.user.username)}>Logout</Button>
+    <Button onClick={() => logoutUser(props.user.user.username)}>Log Out</Button>
   )
 }
 
