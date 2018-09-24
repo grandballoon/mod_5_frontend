@@ -64,7 +64,7 @@ export const logoutUser = (username) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/logout', {
       method: "POST",
-      headers: {"Content-Type": "application/json", Accept: "application/json"},
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify({user: {"username": username}})
     })
     .then(response => {
@@ -77,11 +77,11 @@ export const logoutUser = (username) => {
     .then(console.log)
 
 
-    // .then(message => {
-    //   localStorage.removeItem('jwt')
-    //   dispatch({type:LOGOUT})
-    // })
-    // .catch(r => r.json().then(e => console.log(e.message)))
+    .then(message => {
+      localStorage.removeItem('jwt')
+      dispatch({type:LOGOUT})
+    })
+    .catch(r => r.json().then(e => console.log(e.message)))
   }
 }
 

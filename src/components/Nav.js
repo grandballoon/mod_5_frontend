@@ -8,9 +8,8 @@ const Nav = (props) => {
 
 
   const logProps = () => {console.log(props.user.user.username)}
-
   return (
-    <Button onClick={() => logoutUser(props.user.user.username)}>Log Out</Button>
+    <Button onClick={() => props.logoutUser(props.user.user.username)}>Log Out</Button>
   )
 }
 
@@ -18,4 +17,4 @@ const mapStateToProps = (state) => {
   return {user: state.user}
 }
 
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps, { logoutUser })(Nav)
