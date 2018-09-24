@@ -4,10 +4,11 @@ import Fact from './Fact'
 import { Card } from 'semantic-ui-react'
 import { syncStore } from '../actions'
 import AddFactForm from './AddFactForm'
+import withAuth from '../hocs/withAuth'
 
 const FactList = ({ facts }) => {
 
-  
+
 
   const renderFacts = () => {
     return(
@@ -37,4 +38,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FactList)
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(FactList))

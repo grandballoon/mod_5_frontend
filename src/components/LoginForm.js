@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    return this.props.loggedIn ? (<Redirect to="/test" />) : (
+    return this.props.loggedIn ? (<Redirect to="/home" />) : (
       <Segment>
         <Form
           onSubmit={this.handleLoginSubmit}

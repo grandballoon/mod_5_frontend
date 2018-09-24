@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN } from '../types'
+import { SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT } from '../types'
 
 
 const defaultState = {
@@ -24,6 +24,8 @@ const userReducer = (state=defaultState, action) => {
         error: action.payload,
         authenticatingUser: false
         }
+    case LOGOUT:
+      return defaultState
     default:
       return state
   }

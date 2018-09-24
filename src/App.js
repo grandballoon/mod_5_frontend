@@ -6,6 +6,7 @@ import './App.css';
 import { connect } from 'react-redux'
 import FactList from './components/FactList'
 import AddFactForm from './components/AddFactForm'
+import Nav from './components/Nav'
 import { syncStore } from './actions'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import LoginForm from './components/LoginForm'
@@ -21,10 +22,10 @@ class App extends Component {
   render() {
     return (
         <React.Fragment>
+          <Route path="/" component={Nav} />  
           <Switch>
             <Route exact path="/home" component={FactList} />
             <Route exact path='/login' component={LoginForm} />
-            <Route exact path='/test' component={Test} />
           </Switch>
         </React.Fragment>
     );

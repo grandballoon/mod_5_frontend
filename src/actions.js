@@ -1,4 +1,4 @@
-import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN } from './types'
+import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT } from './types'
 import UUID from 'uuid'
 
 
@@ -57,6 +57,29 @@ export const loginUser = (username, password) => {
         dispatch(setCurrentUser(user))
       })
       .catch(r => r.json().then(e => dispatch(failedLogin(e.message))))
+  }
+}
+
+export const logoutUser = (username) => {
+  return (dispatch) => {
+    fetch('http://localhost:3000/api/v1/logout', {
+      method: "POST",
+      headers: {"Content-Type": "application/json", Accept: "application/json"},
+      body: JSON.stringify({user: {"username": username}})
+    })
+    .then(response => {
+      console.log(response)
+      // if (response.ok) {
+      //   return response.json()
+      // } else {
+      //   throw response
+      // }
+    })
+    .then(message => {
+      localStorage.removeItem('jwt')
+      dispatch({type:LOGOUT})
+    })
+    .catch(r => r.json().then(e => console.log(e.message)))
   }
 }
 
