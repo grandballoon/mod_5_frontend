@@ -28,7 +28,6 @@ const FactList = ({ facts }) => {
 }
 
 function mapStateToProps(state){
-  console.log(state, state.fact)
   return {facts: state.fact.facts}
 }
 

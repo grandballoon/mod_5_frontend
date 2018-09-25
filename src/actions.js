@@ -60,6 +60,25 @@ export const loginUser = (username, password) => {
   }
 }
 
+export const createUser = (username, password, email) => {
+  return (dispatch) => {
+    fetch('http://localhost:3000/api/v1/users',{
+      method: "POST",
+      headers: {"Content-Type": "application/json", Accept: "application/json"},
+      body: JSON.stringify({user: {"username": username, "password": password, "email": email}})
+    })
+    .then (response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response
+      }
+    })
+    .then(resp => dispatch(loginUser(username, password)))
+    .catch(r => r.json().then(e => dispatch(failedLogin(e.message))))
+  }
+}
+
 export const logoutUser = (username) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/logout', {
@@ -74,7 +93,7 @@ export const logoutUser = (username) => {
         throw response
       }
     })
-    .then(console.log)
+    // .then(console.log)
 
 
     .then(message => {
@@ -82,6 +101,28 @@ export const logoutUser = (username) => {
       dispatch({type:LOGOUT})
     })
     .catch(r => r.json().then(e => console.log(e.message)))
+  }
+}
+
+export const subscribe = (userId, factId) => {
+  return (dispatch) => {
+    fetch('http://localhost:3000/api/v1/subscribe', {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({"user_id": userId, "fact_id": factId})
+    })
+    .then(resp => dispatch(fetchCurrentUser()))
+    }
+}
+
+export const unsubscribe = (userId, factId) => {
+  return (dispatch) => {
+    fetch('http://localhost:3000/api/v1/unsubscribe', {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({"user_id": userId, "fact_id": factId})
+    })
+    .then(resp => dispatch(fetchCurrentUser()))
   }
 }
 

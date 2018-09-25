@@ -11,6 +11,7 @@ import { syncStore } from './actions'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import LoginForm from './components/LoginForm'
 import Test from './components/test'
+import SignupForm from './components/SignupForm'
 
 class App extends Component {
 
@@ -22,10 +23,12 @@ class App extends Component {
   render() {
     return (
         <React.Fragment>
-          <Route path="/" component={Nav} />  
+          <Route path="/" component={Nav} />
           <Switch>
+            <Route path="/signup" component={SignupForm} />
             <Route exact path="/home" component={FactList} />
             <Route exact path='/login' component={LoginForm} />
+
           </Switch>
         </React.Fragment>
     );

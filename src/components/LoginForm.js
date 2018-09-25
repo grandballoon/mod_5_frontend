@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
 import { loginUser } from '../actions'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
   state = {username: '', password: ''}
 
-  componentDidMount(){
-    console.log(this.props.history)
-  }
+
 
   handleChange = (e, { name, value }) => {
     this.setState({[name]: value})
@@ -50,6 +49,7 @@ class LoginForm extends React.Component {
         </Form.Group>
         <Button type="submit">Login</Button>
         </Form>
+        <p>New to Factoyd? <Link to='/signup'>Sign up here.</Link></p>
       </Segment>
     )
   }

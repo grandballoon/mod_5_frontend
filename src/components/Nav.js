@@ -7,14 +7,17 @@ import { connect } from 'react-redux'
 const Nav = (props) => {
 
 
-  const logProps = () => {console.log(props.user.user.username)}
-  return (
-    <Button onClick={() => props.logoutUser(props.user.user.username)}>Log Out</Button>
-  )
+  if (props.loggedIn){
+    return (
+      <Button onClick={() => props.logoutUser(props.user.user.username)}>Log Out</Button>
+    )
+  }else {
+    return null
+  }
 }
 
 const mapStateToProps = (state) => {
-  return {user: state.user}
+  return {user: state.user, loggedIn: state.user.loggedIn}
 }
 
 export default connect(mapStateToProps, { logoutUser })(Nav)
