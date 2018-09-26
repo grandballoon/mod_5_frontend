@@ -11,6 +11,7 @@ const FactList = ({ facts }) => {
 
 
   const renderFacts = () => {
+    console.log(facts)
     return(
       facts.map(fact => <Fact key={fact.id} fact={fact}/>)
     )

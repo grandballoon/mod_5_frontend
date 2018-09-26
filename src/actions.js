@@ -25,13 +25,13 @@ export function setStore(array){
 
 export function syncStore(){
   return (dispatch) => {
-    return fetch('http://localhost:3000/api/v1/facts').then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
+    return fetch('http://localhost:3000/api/v1/facts', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
   }
 }
 
 export function uploadFact(description, category, source){
   let factData = {"description": description, "category": category, "source": source}
-  let configObj = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(factData)}
+  let configObj = {method: "POST", headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`}, body: JSON.stringify(factData)}
 
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/facts', configObj).then(resp => resp.json()).then(data => dispatch(syncStore()))
@@ -60,12 +60,12 @@ export const loginUser = (username, password) => {
   }
 }
 
-export const createUser = (username, password, email) => {
+export const createUser = (username, password, email, phoneNumber) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/users',{
       method: "POST",
       headers: {"Content-Type": "application/json", Accept: "application/json"},
-      body: JSON.stringify({user: {"username": username, "password": password, "email": email}})
+      body: JSON.stringify({user: {"username": username, "password": password, "email": email, "phone_number": phoneNumber}})
     })
     .then (response => {
       if (response.ok) {
@@ -108,7 +108,7 @@ export const subscribe = (userId, factId) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/subscribe', {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
+    headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
     body: JSON.stringify({"user_id": userId, "fact_id": factId})
     })
     .then(resp => dispatch(fetchCurrentUser()))
@@ -119,9 +119,9 @@ export const unsubscribe = (userId, factId) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/unsubscribe', {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
+    headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
     body: JSON.stringify({"user_id": userId, "fact_id": factId})
-    })
+  })
     .then(resp => dispatch(fetchCurrentUser()))
   }
 }
