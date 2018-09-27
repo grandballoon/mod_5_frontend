@@ -9,9 +9,6 @@ class AddFactForm extends Component {
     source: ""
   }
 
-  componentDidMount(){
-    console.log(this.state)
-  }
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
