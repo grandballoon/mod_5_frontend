@@ -2,6 +2,7 @@ import { logoutUser } from '../actions'
 import React from 'react'
 import { Button, Menu } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import AddFactModal from './AddFactModal'
 
 
 const Nav = (props) => {
@@ -11,7 +12,10 @@ const Nav = (props) => {
     return (
       <Menu className="Navbar" inverted>
         <Menu.Item className="Logo-text">Factoyd</Menu.Item>
-        <Menu.Item position="right" onClick={() => props.logoutUser(props.user.user.username)}>Log Out</Menu.Item>
+        <Menu.Menu position="right">
+          <AddFactModal />
+          <Menu.Item onClick={() => props.logoutUser(props.user.user.username)}>Log Out</Menu.Item>
+        </Menu.Menu>
       </Menu>
     )
   }else {

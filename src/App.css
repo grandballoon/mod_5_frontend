@@ -36,6 +36,10 @@
   color: white !important;
 }
 
+.Subscribe-button:hover {
+  background-color: #f14d41 !important;
+}
+
 .Logo-text {
   font-family: 'Lobster', cursive !important;
   font-size: 2em !important;

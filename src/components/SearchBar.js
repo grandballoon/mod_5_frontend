@@ -2,7 +2,7 @@ import React from 'react'
 import { enterSearch } from '../actions'
 import { Input, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-
+import AddFactModal from './AddFactModal'
 class SearchBar extends React.Component {
   constructor(props){
     super(props)
@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
     return(
 
       <Input fluid placeholder="Learn Something New" onChange={this.handleType} value={this.state.searchBarText} />
+
 
     )
   }
