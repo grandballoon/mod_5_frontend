@@ -5,13 +5,13 @@ import { Card } from 'semantic-ui-react'
 import { syncStore } from '../actions'
 import AddFactForm from './AddFactForm'
 import withAuth from '../hocs/withAuth'
+import SearchBar from './SearchBar'
 
 const FactList = ({ facts }) => {
 
 
 
   const renderFacts = () => {
-    console.log(facts)
     return(
       facts.map(fact => <Fact key={fact.id} fact={fact}/>)
     )
@@ -19,10 +19,15 @@ const FactList = ({ facts }) => {
 
   return(
     <React.Fragment>
+      <div class="ui two column centered grid">
+      <div class="column">
+      <SearchBar />
+      </div>
       <Card.Group>
         {facts ? renderFacts() : <p>hello</p>}
       </Card.Group>
       <AddFactForm />
+      </div>
     </React.Fragment>
   )
 

@@ -1,20 +1,8 @@
-import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT } from './types'
+import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT, ENTER_SEARCH } from './types'
 import UUID from 'uuid'
 
 
-// export function uploadFact(description, category, source){
-//   return {
-//     type: ADD_FACT,
-//     payload: {
-//       id: UUID(),
-//       description,
-//       category,
-//       source,
-//       disputes: [],
-//       verified: false
-//     }
-//   }
-// }
+// FACT ACTIONS: These handle syncing the backend's fact collection to the store, adding a new fact to the backend (and syncing the store), and searching for facts in the search function
 
 export function setStore(array){
   return {
@@ -37,6 +25,16 @@ export function uploadFact(description, category, source){
     fetch('http://localhost:3000/api/v1/facts', configObj).then(resp => resp.json()).then(data => dispatch(syncStore()))
   }
 }
+
+export function enterSearch(searchTerm){
+  console.log(searchTerm)
+  return {
+    type: ENTER_SEARCH,
+    payload: searchTerm
+  }
+}
+
+// LOGIN AND SIGNUP ACTIONS: These handle the action of signing up or logging in a user, and authenticating the user against the JWT stored in local storage
 
 export const loginUser = (username, password) => {
   return (dispatch) => {
@@ -104,27 +102,7 @@ export const logoutUser = (username) => {
   }
 }
 
-export const subscribe = (userId, factId) => {
-  return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/subscribe', {
-    method: "POST",
-    headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
-    body: JSON.stringify({"user_id": userId, "fact_id": factId})
-    })
-    .then(resp => dispatch(fetchCurrentUser()))
-    }
-}
 
-export const unsubscribe = (userId, factId) => {
-  return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/unsubscribe', {
-    method: "POST",
-    headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
-    body: JSON.stringify({"user_id": userId, "fact_id": factId})
-  })
-    .then(resp => dispatch(fetchCurrentUser()))
-  }
-}
 
 export const fetchCurrentUser = () => {
   return (dispatch) => {
@@ -150,3 +128,27 @@ export const failedLogin = (errorMsg) => ({
 })
 
 export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })
+
+// REMINDER ACTIONS: These handle the process of creating a reminder chain in the backend and adding a fact to a user's learned facts
+
+export const subscribe = (userId, factId) => {
+  return (dispatch) => {
+    fetch('http://localhost:3000/api/v1/subscribe', {
+    method: "POST",
+    headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
+    body: JSON.stringify({"user_id": userId, "fact_id": factId})
+    })
+    .then(resp => dispatch(fetchCurrentUser()))
+    }
+}
+
+// export const unsubscribe = (userId, factId) => {
+//   return (dispatch) => {
+//     fetch('http://localhost:3000/api/v1/unsubscribe', {
+//     method: "POST",
+//     headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
+//     body: JSON.stringify({"user_id": userId, "fact_id": factId})
+//   })
+//     .then(resp => dispatch(fetchCurrentUser()))
+//   }
+// }

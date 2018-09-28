@@ -1,4 +1,4 @@
-import { ADD_FACT, UPDATE_STORE } from '../types'
+import { ADD_FACT, UPDATE_STORE, ENTER_SEARCH } from '../types'
 
 const initialFactState = {}
 
@@ -8,6 +8,8 @@ export default function factReducer(state=initialFactState, action) {
     return {...state, facts:[...state.facts, action.payload]}
     case UPDATE_STORE:
     return {...state, facts: action.payload}
+    case ENTER_SEARCH:
+    return {...state, searchTerm: action.payload}
     default:
     return state
   }

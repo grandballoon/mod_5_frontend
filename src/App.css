@@ -26,3 +26,26 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.Navbar {
+  background-color: #F26157 !important;
+}
+
+.Subscribe-button {
+  background-color: #F26157 !important;
+  color: white !important;
+}
+
+.Logo-text {
+  font-family: 'Lobster', cursive !important;
+  font-size: 2em !important;
+  color: white !important;
+}
+
+.Search-bar {
+  width: 900px !important;
+}
+
+.Center {
+  align-items: center !important;
+}
