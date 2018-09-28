@@ -1,6 +1,7 @@
 import React from 'react'
 import { enterSearch } from '../actions'
 import { Input, Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 class SearchBar extends React.Component {
   constructor(props){
@@ -9,8 +10,7 @@ class SearchBar extends React.Component {
   }
 
   handleType = (event) => {
-    console.log(event.target)
-    this.setState({searchBarText: event.target.value})
+    this.setState({searchBarText: event.target.value}, () => this.props.enterSearch(this.state.searchBarText))
   }
 
   render(){
@@ -23,4 +23,4 @@ class SearchBar extends React.Component {
 
 }
 
-export default SearchBar
+export default connect(null, { enterSearch })(SearchBar)

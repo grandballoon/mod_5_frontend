@@ -1,6 +1,6 @@
 import { ADD_FACT, UPDATE_STORE, ENTER_SEARCH } from '../types'
 
-const initialFactState = {}
+const initialFactState = {facts: [], searchTerm: ''}
 
 export default function factReducer(state=initialFactState, action) {
   switch(action.type){

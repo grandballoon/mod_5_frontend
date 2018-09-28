@@ -23,19 +23,13 @@ const checkSubscription = () => {
 }
 
   return (
-    <Card>
+      <Card>
         <Card.Content header={props.fact.description} />
-
-
           <a href={props.fact.source}>
             <Card.Content meta='factcheck' />
           </a>
-
           { checkSubscription() ? <Button className="Subscribe-button" disabled>Reminded!</Button> : <Button className="Subscribe-button" onClick={handleSubscribe}>Remind Me</Button>}
-
-
-
-    </Card>
+      </Card>
   )
 
 

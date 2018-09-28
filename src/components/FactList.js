@@ -7,26 +7,30 @@ import AddFactForm from './AddFactForm'
 import withAuth from '../hocs/withAuth'
 import SearchBar from './SearchBar'
 
-const FactList = ({ facts }) => {
+const FactList = (props) => {
 
 
-
-  const renderFacts = () => {
-    return(
-      facts.map(fact => <Fact key={fact.id} fact={fact}/>)
-    )
+const renderFacts = () => {
+    if (props.searchTerm != '') {
+      return props.facts.filter(fact => fact.description.includes(props.searchTerm)).map(fact => <Fact key={fact.id} fact={fact}/>)
+    } else {
+      return props.facts.map(fact => <Fact key={fact.id} fact={fact}/>)
+    }
   }
 
   return(
     <React.Fragment>
-      <div class="ui two column centered grid">
-      <div class="column">
-      <SearchBar />
+      <div className="ui two column centered grid">
+          <div className="column">
+            <SearchBar />
+        </div>
       </div>
-      <Card.Group>
-        {facts ? renderFacts() : <p>hello</p>}
-      </Card.Group>
-      <AddFactForm />
+      <div className="ui sixteen column centered grid">
+        <div >
+          <Card.Group className="twelve column centered row">
+            {renderFacts()}
+          </Card.Group>
+        </div>
       </div>
     </React.Fragment>
   )
@@ -34,7 +38,7 @@ const FactList = ({ facts }) => {
 }
 
 function mapStateToProps(state){
-  return {facts: state.fact.facts}
+  return {facts: state.fact.facts, searchTerm: state.fact.searchTerm}
 }
 
 function mapDispatchToProps(dispatch) {
