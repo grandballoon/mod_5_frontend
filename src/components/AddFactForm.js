@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { uploadFact, syncStore } from '../actions'
+import { Form, Button } from 'semantic-ui-react'
 
 class AddFactForm extends Component {
   state ={
@@ -22,12 +23,18 @@ class AddFactForm extends Component {
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Field>
         <label>Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></label>
+        </Form.Field>
+        <Form.Field>
         <label>Category: <input type="text" name="category" value={this.state.category} onChange={this.handleChange}/></label>
+        </Form.Field>
+        <Form.Field>
         <label>Source: <input type="text" name="source" value={this.state.source} onChange={this.handleChange}/></label>
-        <input type="submit" value="Add Fact" />
-      </form>
+        </Form.Field>
+        <Button type="submit">Submit</Button>
+      </Form>
     )
   }
 
