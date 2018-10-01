@@ -53,3 +53,7 @@
 .Center {
   align-items: center !important;
 }
+
+.Fact-description {
+  font-family: 'Anton', sans-serif !important;
+}

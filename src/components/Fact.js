@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 const Fact = (props) => {
 
+
+
 const handleSubscribe = () => {
   props.subscribe(props.user.id, props.fact.id)
 }
@@ -14,7 +16,6 @@ const handleSubscribe = () => {
 // }
 
 const checkSubscriptionCallback = (fact) => {
-  // console.log(fact)
   return (fact.id === props.fact.id)
 }
 
@@ -24,7 +25,7 @@ const checkSubscription = () => {
 
   return (
       <Card>
-        <Card.Content header={props.fact.description} />
+        <Card.Content style={{fontFamily: 'Helvetica'}} header={props.fact.description} />
           <a href={props.fact.source}>
             <Card.Content meta='factcheck' />
           </a>

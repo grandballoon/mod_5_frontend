@@ -5,6 +5,7 @@ import { uploadFact, syncStore } from '../actions'
 import { connect } from 'react-redux'
 
 class AddFactModal extends React.Component {
+
   state ={
     description: "",
     category: "",
@@ -12,10 +13,14 @@ class AddFactModal extends React.Component {
     modalOpen: false
   }
 
+  options = [{key: 1, text: "Science", value: "Science"}, {key: 2, text: "History", value: "History"}, {key: 3, text: "Entertainment", value: "Entertainment"}, {key: 4, text: "Culture", value: "Culture"}, {key: 5, text: "Politics", value: "Politics"}]
+
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
   }
+
+  handleDropDownChange = (e, data) => this.setState({category: data.value}, () => console.log(this.state))
 
   resetState = () => {
     this.setState({description: '', category: '', source: ''})
@@ -23,7 +28,7 @@ class AddFactModal extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state, this.props)
+    console.log(this.state)
     this.props.uploadFact(this.state.description, this.state.category, this.state.source)
     this.handleClose()
   }
@@ -34,7 +39,7 @@ class AddFactModal extends React.Component {
 
   render(){
     return(
-      <Modal trigger={<Menu.Item onClick={this.handleOpen}  position="right" className="Subscribe-button">Add A Fact</Menu.Item>}
+      <Modal trigger={<Menu.Item onClick={this.handleOpen}  position="right" >Add A Fact</Menu.Item>}
       open={this.state.modalOpen}
       onClose={this.handleClose}
         >
@@ -43,15 +48,9 @@ class AddFactModal extends React.Component {
             <div className="column">
               <br/>
               <Form onSubmit={this.handleSubmit}>
-                <Form.Field>
-                <label>Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></label>
-                </Form.Field>
-                <Form.Field>
-                <label>Category: <input type="text" name="category" value={this.state.category} onChange={this.handleChange}/></label>
-                </Form.Field>
-                <Form.Field>
-                <label>Source: <input type="text" name="source" value={this.state.source} onChange={this.handleChange}/></label>
-                </Form.Field>
+                <Form.Input label="Description:" placeholder="Bees communicate by dancing" type="text" name="description" value={this.state.description} onChange={this.handleChange}/>
+                <Form.Select label="Category:" name="category" options={this.options} value={this.state.category} onChange={this.handleDropDownChange}/>
+                <Form.Input label="Source:" placeholder="Verifying is very fine...ing" type="text" name="source" value={this.state.source} options={this.options} onChange={this.handleChange}/>
                 <Button type="submit">Submit</Button>
               </Form>
             <br/>
@@ -64,6 +63,10 @@ class AddFactModal extends React.Component {
 
 }
 
+const mapStateToProps = state => {
+  return {categories: state.fact.categories}
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     syncer: () => dispatch(syncStore()),
@@ -71,4 +74,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddFactModal)
+export default connect(mapStateToProps, mapDispatchToProps)(AddFactModal)

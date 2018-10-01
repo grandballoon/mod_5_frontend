@@ -11,8 +11,9 @@ const FactList = (props) => {
 
 
 const renderFacts = () => {
+  console.log(props.facts)
     if (props.searchTerm != '') {
-      return props.facts.filter(fact => fact.description.includes(props.searchTerm)).map(fact => <Fact key={fact.id} fact={fact}/>)
+      return props.facts.filter(fact => fact.description.toLowerCase().includes(props.searchTerm.toLowerCase())).map(fact => <Fact key={fact.id} fact={fact}/>)
     } else {
       return props.facts.map(fact => <Fact key={fact.id} fact={fact}/>)
     }
@@ -27,7 +28,7 @@ const renderFacts = () => {
       </div>
       <div className="ui sixteen column centered grid">
         <div >
-          <Card.Group className="twelve column centered row">
+          <Card.Group className="twelve column centered row" >
             {renderFacts()}
           </Card.Group>
         </div>

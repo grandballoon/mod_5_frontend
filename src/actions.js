@@ -27,7 +27,6 @@ export function uploadFact(description, category, source){
 }
 
 export function enterSearch(searchTerm){
-  console.log(searchTerm)
   return {
     type: ENTER_SEARCH,
     payload: searchTerm
