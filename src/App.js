@@ -12,6 +12,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import LoginForm from './components/LoginForm'
 import Test from './components/test'
 import SignupForm from './components/SignupForm'
+import './semantic/dist/semantic.min.css';
 
 class App extends Component {
 

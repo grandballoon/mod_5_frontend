@@ -1,6 +1,6 @@
-import { ADD_FACT, UPDATE_STORE, ENTER_SEARCH } from '../types'
+import { ADD_FACT, UPDATE_STORE, ENTER_SEARCH, SET_CATEGORIES } from '../types'
 
-const initialFactState = {facts: [], searchTerm: ''}
+const initialFactState = {facts: [], searchTerm: '', categories:[]}
 
 export default function factReducer(state=initialFactState, action) {
   switch(action.type){
@@ -10,6 +10,8 @@ export default function factReducer(state=initialFactState, action) {
     return {...state, facts: action.payload}
     case ENTER_SEARCH:
     return {...state, searchTerm: action.payload}
+    case SET_CATEGORIES:
+    return {...state, categories: action.payload}
     default:
     return state
   }

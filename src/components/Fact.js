@@ -3,35 +3,45 @@ import { Card, Button, Icon } from 'semantic-ui-react'
 import { subscribe } from '../actions'
 import { connect } from 'react-redux'
 
-const Fact = (props) => {
-
-
-
-const handleSubscribe = () => {
-  props.subscribe(props.user.id, props.fact.id)
+class Fact extends Component {
+constructor(props) {
+  super(props)
+  this.state = {loading: false}
 }
 
-// const handleUnsubscribe = () => {
-//   props.unsubscribe(props.user.id, props.fact.id)
-// }
 
-const checkSubscriptionCallback = (fact) => {
-  return (fact.id === props.fact.id)
+handleSubscribe = () => {
+  this.setState({loading: true})
+  this.props.subscribe(this.props.user.id, this.props.fact.id)
 }
 
-const checkSubscription = () => {
-  return props.user.facts.some(checkSubscriptionCallback)
+checkSubscriptionCallback = (fact) => {
+  return (fact.id === this.props.fact.id)
 }
 
-  return (
-      <Card>
-        <Card.Content style={{fontFamily: 'Helvetica'}} header={props.fact.description} />
-          <a href={props.fact.source}>
-            <Card.Content meta='factcheck' />
-          </a>
-          { checkSubscription() ? <Button className="Subscribe-button" disabled>Reminded!</Button> : <Button className="Subscribe-button" onClick={handleSubscribe}>Remind Me</Button>}
-      </Card>
-  )
+buttonWithLoader = () => {
+  if (!this.state.loading) {
+    return <Button style={{backgroundColor: "#F26157", color: "white"}} className="Subscribe-button" onClick={this.handleSubscribe}>Remind Me</Button>
+  } else if (this.state.loading) {
+    return <Button style={{backgroundColor: "#F26157", color: "white"}} className="ui loading button" />
+  }
+
+}
+
+checkSubscription = () => {
+  return this.props.user.facts.some(this.checkSubscriptionCallback)
+}
+ render () {
+   return (
+     <Card>
+       <Card.Content header={this.props.fact.description} />
+       <a href={this.props.fact.source}>
+         <Card.Content meta='factcheck' />
+       </a>
+       { this.checkSubscription() ? <Button style={{backgroundColor: "#F26157", color: "white"}} disabled>Reminded!</Button> : this.buttonWithLoader() }
+     </Card>
+   )
+ }
 
 
 }

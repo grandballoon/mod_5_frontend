@@ -1,4 +1,4 @@
-import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT, ENTER_SEARCH } from './types'
+import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT, ENTER_SEARCH, SET_CATEGORIES } from './types'
 import UUID from 'uuid'
 
 
@@ -13,7 +13,20 @@ export function setStore(array){
 
 export function syncStore(){
   return (dispatch) => {
-    return fetch('http://localhost:3000/api/v1/facts', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
+     fetch('http://localhost:3000/api/v1/facts', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
+  }
+}
+
+export function fetchCategories(){
+  return (dispatch) => {
+    fetch('http://localhost:3000/api/v1/categories', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(categories => dispatch(setCategories(categories)))
+  }
+}
+
+export function setCategories(array){
+  return {
+    type: SET_CATEGORIES,
+    payload: array
   }
 }
 
@@ -101,8 +114,6 @@ export const logoutUser = (username) => {
   }
 }
 
-
-
 export const fetchCurrentUser = () => {
   return (dispatch) => {
     dispatch(authenticatingUser())
@@ -140,14 +151,3 @@ export const subscribe = (userId, factId) => {
     .then(resp => dispatch(fetchCurrentUser()))
     }
 }
-
-// export const unsubscribe = (userId, factId) => {
-//   return (dispatch) => {
-//     fetch('http://localhost:3000/api/v1/unsubscribe', {
-//     method: "POST",
-//     headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
-//     body: JSON.stringify({"user_id": userId, "fact_id": factId})
-//   })
-//     .then(resp => dispatch(fetchCurrentUser()))
-//   }
-// }

@@ -28,8 +28,8 @@ class AddFactModal extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state)
     this.props.uploadFact(this.state.description, this.state.category, this.state.source)
+    this.setState({description: '', category:'', source:''})
     this.handleClose()
   }
 

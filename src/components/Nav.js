@@ -10,8 +10,8 @@ const Nav = (props) => {
 
   if (props.loggedIn){
     return (
-      <Menu className="Navbar" inverted>
-        <Menu.Item className="Logo-text">Factoyd</Menu.Item>
+      <Menu style={{backgroundColor: "#F26157"}} inverted>
+        <Menu.Item style={{fontFamily: 'Lobster, cursive', fontSize: "2em", color: "white"}}>Factoyd</Menu.Item>
         <Menu.Menu position="right">
           <AddFactModal />
           <Menu.Item onClick={() => props.logoutUser(props.user.user.username)}>Log Out</Menu.Item>
