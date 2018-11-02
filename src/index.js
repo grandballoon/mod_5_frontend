@@ -8,6 +8,7 @@ import store from './store'
 import { BrowserRouter as Router } from 'react-router-dom'
 import './semantic/dist/semantic.min.css';
 
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>

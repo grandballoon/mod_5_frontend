@@ -1,8 +1,7 @@
 import React from 'react'
 import { enterSearch } from '../actions'
-import { Input, Grid } from 'semantic-ui-react'
+import { Input } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import AddFactModal from './AddFactModal'
 class SearchBar extends React.Component {
   constructor(props){
     super(props)

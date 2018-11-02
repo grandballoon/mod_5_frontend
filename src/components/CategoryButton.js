@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const CategoryButton = (props) => {
 
-console.log(props)
+
 
   return (
     <Button basic style={{color: "#F26157"}} onClick={() => props.enterSearch(props.category.name)}>{props.category.name}</Button>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import { loginUser } from '../actions'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'

@@ -1,5 +1,5 @@
-import { ADD_FACT, UPDATE_STORE, SET_CURRENT_USER, AUTHENICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, LOGOUT, ENTER_SEARCH, SET_CATEGORIES } from './types'
-import UUID from 'uuid'
+import { UPDATE_STORE, SET_CURRENT_USER, LOGOUT, ENTER_SEARCH, SET_CATEGORIES } from './types'
+
 
 
 // FACT ACTIONS: These handle syncing the backend's fact collection to the store, adding a new fact to the backend (and syncing the store), and searching for facts in the search function
@@ -72,6 +72,7 @@ export const loginUser = (username, password) => {
 
 export const createUser = (username, password, email, phoneNumber) => {
   return (dispatch) => {
+    dispatch(authenticatingUser())
     fetch('http://localhost:3000/api/v1/users',{
       method: "POST",
       headers: {"Content-Type": "application/json", Accept: "application/json"},
@@ -85,7 +86,7 @@ export const createUser = (username, password, email, phoneNumber) => {
       }
     })
     .then(resp => dispatch(loginUser(username, password)))
-    .catch(r => r.json().then(e => dispatch(failedLogin(e.message))))
+    .catch(r => r.json().then(e => dispatch(failedLogin(e.error))))
   }
 }
 
@@ -122,7 +123,6 @@ export const fetchCurrentUser = () => {
       headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}
     })
     .then(resp => resp.json())
-    // .then(r => console.log(r))
     .then(({ user }) => dispatch(setCurrentUser(user)))
   }
 }

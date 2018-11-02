@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Header, Image, Modal, Menu, Form } from 'semantic-ui-react'
-import AddFactForm from './AddFactForm'
+import { Button, Modal, Menu, Form } from 'semantic-ui-react'
 import { uploadFact, syncStore } from '../actions'
 import { connect } from 'react-redux'
 
