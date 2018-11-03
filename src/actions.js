@@ -13,7 +13,7 @@ export function setStore(array){
 
 export function syncStore(){
   return (dispatch) => {
-     fetch(process.env.FACTS_URL, {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.text()).then(console.log)
+     fetch('https://blooming-woodland-68590.herokuapp.com/api/v1/facts', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.text()).then(console.log)
 
        // resp => resp.json()).then(facts => dispatch(setStore(facts)))
   }
