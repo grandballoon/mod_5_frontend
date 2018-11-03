@@ -13,7 +13,9 @@ export function setStore(array){
 
 export function syncStore(){
   return (dispatch) => {
-     fetch(process.env.FACTS_URL, {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
+     fetch(process.env.FACTS_URL, {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.text()).then(console.log)
+
+       // resp => resp.json()).then(facts => dispatch(setStore(facts)))
   }
 }
 
