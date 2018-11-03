@@ -13,13 +13,13 @@ export function setStore(array){
 
 export function syncStore(){
   return (dispatch) => {
-     fetch('http://localhost:3000/api/v1/facts', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
+     fetch(process.env.FACTS_URL, {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(facts => dispatch(setStore(facts)))
   }
 }
 
 export function fetchCategories(){
   return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/categories', {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(categories => dispatch(setCategories(categories)))
+    fetch(process.env.CAT_URL, {headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}}).then(resp => resp.json()).then(categories => dispatch(setCategories(categories)))
   }
 }
 
@@ -35,7 +35,7 @@ export function uploadFact(description, category, source){
   let configObj = {method: "POST", headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`}, body: JSON.stringify(factData)}
 
   return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/facts', configObj).then(resp => resp.json()).then(data => dispatch(syncStore()))
+    fetch(process.env.FACTS_URL, configObj).then(resp => resp.json()).then(data => dispatch(syncStore()))
   }
 }
 
@@ -50,7 +50,7 @@ export function enterSearch(searchTerm){
 
 export const loginUser = (username, password) => {
   return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/login', {
+    fetch(process.env.LOGIN_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json", Accept: "application/json"},
       body: JSON.stringify({user: {"username": username, "password": password}})
@@ -73,7 +73,7 @@ export const loginUser = (username, password) => {
 export const createUser = (username, password, email, phoneNumber) => {
   return (dispatch) => {
     dispatch(authenticatingUser())
-    fetch('http://localhost:3000/api/v1/users',{
+    fetch(process.env.USERS_URL,{
       method: "POST",
       headers: {"Content-Type": "application/json", Accept: "application/json"},
       body: JSON.stringify({user: {"username": username, "password": password, "email": email, "phone_number": phoneNumber}})
@@ -92,7 +92,7 @@ export const createUser = (username, password, email, phoneNumber) => {
 
 export const logoutUser = (username) => {
   return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/logout', {
+    fetch(process.env.LOGOUT_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({user: {"username": username}})
@@ -118,7 +118,7 @@ export const logoutUser = (username) => {
 export const fetchCurrentUser = () => {
   return (dispatch) => {
     dispatch(authenticatingUser())
-    fetch('http://localhost:3000/api/v1/profile', {
+    fetch(process.env.PROFILE_URL, {
       method: "GET",
       headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}
     })
@@ -143,7 +143,7 @@ export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })
 
 export const subscribe = (userId, factId) => {
   return (dispatch) => {
-    fetch('http://localhost:3000/api/v1/subscribe', {
+    fetch(process.env.SUBSCRIBE_URL, {
     method: "POST",
     headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('jwt')}`},
     body: JSON.stringify({"user_id": userId, "fact_id": factId})
