@@ -16,7 +16,7 @@ handleSubscribe = () => {
 }
 
 checkSubscriptionCallback = (fact) => {
-  return (fact.id === this.props.fact.id)
+  return (fact.description === this.props.fact.description)
 }
 
 buttonWithLoader = () => {

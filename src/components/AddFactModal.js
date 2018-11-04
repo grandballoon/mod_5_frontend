@@ -19,7 +19,7 @@ class AddFactModal extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleDropDownChange = (e, data) => this.setState({category: data.value}, () => console.log(this.state))
+  handleDropDownChange = (e, data) => this.setState({category: data.value})
 
   resetState = () => {
     this.setState({description: '', category: '', source: ''})
@@ -34,7 +34,7 @@ class AddFactModal extends React.Component {
 
   handleOpen = () => this.setState({ modalOpen: true })
 
-  handleClose = () => this.setState({ modalOpen: false }, () => console.log(this.state))
+  handleClose = () => this.setState({ modalOpen: false })
 
   render(){
     return(
