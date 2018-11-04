@@ -29,7 +29,7 @@ buttonWithLoader = () => {
 }
 
 checkSubscription = () => {
-  return this.props.user.facts.some(this.checkSubscriptionCallback)
+  this.props.user ? this.props.user.facts.some(this.checkSubscriptionCallback) : null
 }
  render () {
    return (
