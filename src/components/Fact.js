@@ -29,7 +29,9 @@ buttonWithLoader = () => {
 }
 
 checkSubscription = () => {
-  this.props.user ? this.props.user.facts.some(this.checkSubscriptionCallback) : null
+  // this.props.user ? 
+  this.props.user.facts.some(this.checkSubscriptionCallback)
+   // : null
 }
  render () {
    console.log(this.props.user ? "yes user" : "no user")
