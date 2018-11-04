@@ -32,8 +32,8 @@ checkSubscription = () => {
   this.props.user ? this.props.user.facts.some(this.checkSubscriptionCallback) : null
 }
  render () {
-   console.log("check subscription returns:")
-   console.log(this.checkSubscription())
+   console.log(this.props.user.facts)
+   console.log(this.props.user.facts.some(this.checkSubscriptionCallback))
    return (
      <Card>
        <Card.Content header={this.props.fact.description} />
