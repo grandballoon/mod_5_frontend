@@ -122,8 +122,8 @@ export const fetchCurrentUser = () => {
       method: "GET",
       headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`}
     })
-    .then(resp => resp.json())
-    .then(({ user }) => dispatch(setCurrentUser(user)))
+    .then(resp => resp.json()).then(console.log)
+    // .then(({ user }) => dispatch(setCurrentUser(user)))
   }
 }
 
