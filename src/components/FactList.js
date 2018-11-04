@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Fact from './Fact'
 import { Card } from 'semantic-ui-react'
-import { syncStore, fetchCategories } from '../actions'
+import { syncStore, fetchCategories, fetchCurrentUser } from '../actions'
 import withAuth from '../hocs/withAuth'
 import SearchBar from './SearchBar'
 import CategoryButton from './CategoryButton'
@@ -12,6 +12,7 @@ class FactList extends Component {
 
   componentDidMount(){
     this.props.fetchCategories()
+    this.props.fetchCurrentUser()
   }
 
   renderFacts = () => {
@@ -65,7 +66,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch) {
   return {
     syncer: () => dispatch(syncStore()),
-    fetchCategories: () => dispatch(fetchCategories())
+    fetchCategories: () => dispatch(fetchCategories()),
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
   }
 }
 
