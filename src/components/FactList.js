@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Fact from './Fact'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
 import { syncStore, fetchCategories, fetchCurrentUser, enterSearch } from '../actions'
 import withAuth from '../hocs/withAuth'
 import SearchBar from './SearchBar'
