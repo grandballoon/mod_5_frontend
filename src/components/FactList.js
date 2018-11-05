@@ -44,7 +44,7 @@ class FactList extends Component {
         </div>
         <br /> <br /> <br />
         <div className="ui centered grid">
-          <p><i>Subscribe to a fact and Factoyd will text it to you on a <a href="https://www.theguardian.com/education/2016/jan/23/spaced-repetition-a-hack-to-make-your-brain-store-information">spaced repetition basis</a> to help you automate learning!</i></p>
+          <p><i>Subscribe to a fact and Factoyd will text it to you on a <a href="https://www.theguardian.com/education/2016/jan/23/spaced-repetition-a-hack-to-make-your-brain-store-information">spaced repetition basis</a> to help you automate learning! You'll receive a text every ten days for a number of reviews; text "STOP" to stop.</i></p>
         </div>
         <div className="ui sixteen column centered grid">
           <div >
