@@ -37,7 +37,7 @@ class FactList extends Component {
         <div className="ui centered grid">
           <div className="ten wide column">
             <SearchBar />
-            {this.props.searchTerm !== "" ? <Button icon onClick={() => this.props.enterSearch("")}><Icon name="close"/></Button>}
+            {this.props.searchTerm !== "" ? <Button icon onClick={() => this.props.enterSearch("")}><Icon name="close"/></Button> : null}
           </div>
         </div>
         <div className="ui centered grid">
