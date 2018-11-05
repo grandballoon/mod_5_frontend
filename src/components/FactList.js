@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Fact from './Fact'
-import { Card } from 'semantic-ui-react'
-import { syncStore, fetchCategories, fetchCurrentUser } from '../actions'
+import { Card, Button } from 'semantic-ui-react'
+import { syncStore, fetchCategories, fetchCurrentUser, enterSearch } from '../actions'
 import withAuth from '../hocs/withAuth'
 import SearchBar from './SearchBar'
 import CategoryButton from './CategoryButton'
@@ -37,10 +37,12 @@ class FactList extends Component {
         <div className="ui centered grid">
           <div className="ten wide column">
             <SearchBar />
+            {this.props.searchTerm !== "" ? <Button icon onClick={() => this.props.enterSearch("")}><Icon name="close"/></Button>}
           </div>
         </div>
         <div className="ui centered grid">
             {this.renderButtons()}
+
         </div>
         <br /> <br /> <br />
         <div className="ui centered grid">
@@ -67,7 +69,8 @@ function mapDispatchToProps(dispatch) {
   return {
     syncer: () => dispatch(syncStore()),
     fetchCategories: () => dispatch(fetchCategories()),
-    fetchCurrentUser: () => dispatch(fetchCurrentUser())
+    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+    enterSearch: (term) => dispatch(enterSearch(term))
   }
 }
 
