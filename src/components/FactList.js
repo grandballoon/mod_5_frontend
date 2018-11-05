@@ -29,6 +29,9 @@ class FactList extends Component {
       }
     }
 
+  renderResetButton = () => {
+    return this.props.searchTerm !== "" ? <Button icon onClick={() => this.props.enterSearch("")}><Icon name="close"/></Button> : null
+  }
 
   render(){
     return(
@@ -37,12 +40,11 @@ class FactList extends Component {
         <div className="ui centered grid">
           <div className="ten wide column">
             <SearchBar />
-            {this.props.searchTerm !== "" ? <Button icon onClick={() => this.props.enterSearch("")}><Icon name="close"/></Button> : null}
           </div>
         </div>
         <div className="ui centered grid">
             {this.renderButtons()}
-
+            {this.renderResetButton()}
         </div>
         <br /> <br /> <br />
         <div className="ui centered grid">
